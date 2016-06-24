@@ -1,16 +1,4 @@
-# class Vector(object):
-#     def __init__(self, x, y):
-#         self.x = x
-#         self.y = y
-#
-#     def __add__(self, other):
-#         x_total = self.x + other.x
-#         y_total = self.y + other.y
-#         return x_total, y_total
-#
-#     def __str__(self):
-#         return self.x, self.y
-
+import math
 
 class Vector(object):
     def __init__(self, coordinates):
@@ -56,6 +44,18 @@ class Vector(object):
             total.append(self.coordinates[n]*other)
         return Vector(total)
 
+    def mag(self):
+        sqmagnitude = 0.0
+        for n in range(0, self.dimension):
+            sqmagnitude += self.coordinates[n]**2
+        return math.sqrt(sqmagnitude)
+
+    def normal(self):
+        mag = self.mag()
+        n_vector = []
+        for n in range(0, self.dimension):
+            n_vector.append(self.coordinates[n]/mag)
+        return Vector(n_vector)
 
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
