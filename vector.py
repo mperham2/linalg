@@ -18,9 +18,7 @@ class Vector(object):
         try:
             if not self.dimension == other.dimension:
                 raise ValueError
-            total = []
-            for n in range(0, self.dimension):
-                total.append(self.coordinates[n]+other.coordinates[n])
+            total = [x+y for x,y in zip(self.coordinates,other.coordinates)]
             return Vector(total)
 
         except ValueError:
@@ -30,18 +28,24 @@ class Vector(object):
         try:
             if not self.dimension == other.dimension:
                 raise ValueError
-            total = []
-            for n in range(0, self.dimension):
-                total.append(self.coordinates[n]-other.coordinates[n])
+            total = [x-y for x,y in zip(self.coordinates, other.coordinates)]
+            return Vector(total)
+
+        except ValueError:
+            raise ValueError('The vectors must have the same number of dimensions')
+
+    def sub(self, other):
+        try:
+            if not self.dimension == other.dimension:
+                raise ValueError
+            total = [x-y for x,y in zip(self.coordinates, other.coordinates)]
             return Vector(total)
 
         except ValueError:
             raise ValueError('The vectors must have the same number of dimensions')
 
     def __mul__(self, other):
-        total = []
-        for n in range(0, self.dimension):
-            total.append(self.coordinates[n]*other)
+        total = [self.coordinates[n]*other for n in self.coordinates]
         return Vector(total)
 
     def mag(self):
