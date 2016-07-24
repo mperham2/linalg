@@ -51,10 +51,10 @@ class Vector(object):
         return Vector(total)
 
     def mag(self):
-        sqmagnitude = 0.0
+        sqmagnitude = Decimal(0.0)
         for n in range(0, self.dimension):
-            sqmagnitude += self.coordinates[n]**2
-        return math.sqrt(sqmagnitude)
+            sqmagnitude += Decimal(self.coordinates[n]**2)
+        return float(math.sqrt(sqmagnitude))
 
     def normalize(self):
         mag = self.mag()
@@ -68,16 +68,16 @@ class Vector(object):
         return sum(total)
 
     def angle(self, v, is_degrees=False):
-        dptot = self.dp(v)
-        return_angle = math.acos(dptot/(self.mag()*v.mag()))
+        dptot = Decimal(self.dp(v))
+        return_angle = math.acos(dptot/(Decimal(self.mag())*Decimal(v.mag())))
         if is_degrees:
-            return return_angle*180/math.pi
+            return return_angle*Decimal(180/math.pi)
         else:
             return return_angle
 
     def is_parallel(self, v):
-        tolerance = 1e-9
-        if abs(self.angle(v)) < tolerance or abs(self.angle(v)-math.pi<tolerance):
+        tolerance = Decimal(1e-9)
+        if abs(Decimal(self.angle(v))) < tolerance or abs(Decimal(self.angle(v))-Decimal(math.pi)) < tolerance:
             return True
         else:
             return False
