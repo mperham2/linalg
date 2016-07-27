@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="330f8e01-487e-4165-9478-34c91ed89ecc" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/plane.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/line.py" afterPath="$PROJECT_DIR$/line.py" />
     </list>
     <ignored path="linalg.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,11 +36,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="line.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="line.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/line.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.089709766">
+            <state vertical-scroll-proportion="0.0">
               <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plane.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/plane.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9208443">
+              <caret line="101" column="30" selection-start-line="101" selection-start-column="30" selection-end-line="101" selection-end-column="30" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -65,6 +77,7 @@
       <list>
         <option value="$PROJECT_DIR$/vector.py" />
         <option value="$PROJECT_DIR$/line.py" />
+        <option value="$PROJECT_DIR$/plane.py" />
       </list>
     </option>
   </component>
@@ -298,7 +311,13 @@
       <option name="project" value="LOCAL" />
       <updated>1469394873128</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="line equals, intersection, and __eq__ completed.">
+      <created>1469586120684</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1469586120684</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -333,7 +352,8 @@
     <MESSAGE value="made add and subtract more pythonic" />
     <MESSAGE value="additional functions for areas and cross product" />
     <MESSAGE value="Added the line equals function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the line equals function" />
+    <MESSAGE value="line equals, intersection, and __eq__ completed." />
+    <option name="LAST_COMMIT_MESSAGE" value="line equals, intersection, and __eq__ completed." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -462,8 +482,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/line.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.089709766">
+        <state vertical-scroll-proportion="0.0">
           <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plane.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9208443">
+          <caret line="101" column="30" selection-start-line="101" selection-start-column="30" selection-end-line="101" selection-end-column="30" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
