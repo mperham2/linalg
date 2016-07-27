@@ -23,7 +23,7 @@ class Line(object):
 
         if not constant_term:
             constant_term = Decimal('0')
-        self.constant_term = constant_term
+        self.constant_term = Decimal(constant_term)
 
         self.set_basepoint()
 
@@ -33,7 +33,7 @@ class Line(object):
             n = self.normal_vector.coordinates
             c = self.constant_term
             bc = ['0']*self.dimension
-            basepoint_coords = [Decimal(n) for n in bc]
+            basepoint_coords = [Decimal(num) for num in bc]
 
             initial_index = Line.first_nonzero_index(n)
             initial_coefficient = n[initial_index]
@@ -107,12 +107,15 @@ class Line(object):
         return na.is_parallel(nb)
 
     def is_same(self, line2):
-        if (self.is_parallel(line2) and
-        Decimal(self.normal_vector[0])/self.constant_term == Decimal(line2.normal_vector[0])/line2.constant_term and
-        Decimal(self.normal_vector[1])/self.constant_term == Decimal(line2.normal_vector[1])/line2.constant_term):
-            return True
-        else:
+        if not self.is_parallel(line2):
             return False
+
+        x0 = self.basepoint
+        y0 = line2.basepoint
+        basepoint_difference = x0 - y0
+
+        n = self.normal_vector
+        return basepoint_difference.is_orthogonal(n)
 
     def __eq__(self, other):
 
@@ -124,18 +127,14 @@ class Line(object):
         basepoint_difference = x0 - y0
 
         n = self.normal_vector
-        return basepoint_difference.is_orthogonal
+        return basepoint_difference.is_orthogonal(n)
 
     def intersect(self, line2):
-        for n in range(0,1):
-            self.normal_vector.coordinates[n] = Decimal(self.normal_vector.coordinates[n])
-            line2.normal_vector.coordinates[n] = Decimal(line2.normal_vector.coordinates[n])
-
         if not self.is_same(line2):
-            y_int_top = (Decimal(line2.normal_vector[0])*self.constant_term-Decimal(self.normal_vector[0])*line2.constant_term)
-            int_bottom = (Decimal(self.normal_vector[0])*line2.normal_vector[1]-Decimal(self.normal_vector[1])*line2.normal_vector[0])
+            y_int_top = (line2.normal_vector.coordinates[0]*self.constant_term-self.normal_vector.coordinates[0]*line2.constant_term)
+            int_bottom = (self.normal_vector.coordinates[0]*line2.normal_vector.coordinates[1]-self.normal_vector.coordinates[1]*line2.normal_vector.coordinates[0])
             y_int = Decimal(y_int_top)/Decimal(int_bottom)
-            x_int_top = (line2.normal_vector[1]*self.constant_term-self.normal_vector[1]*line2.constant_term)
+            x_int_top = (line2.normal_vector.coordinates[1]*self.constant_term-self.normal_vector.coordinates[1]*line2.constant_term)
             x_int = Decimal(x_int_top)/Decimal(int_bottom)
             return x_int, -1*y_int
         else:
