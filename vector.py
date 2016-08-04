@@ -71,13 +71,15 @@ class Vector(object):
         dptot = Decimal(self.dp(v))
         return_angle = math.acos(dptot/(Decimal(self.mag())*Decimal(v.mag())))
         if is_degrees:
-            return return_angle*Decimal(180/math.pi)
+            return return_angle * Decimal(180/math.pi)
         else:
             return return_angle
 
     def is_parallel(self, v):
         tolerance = Decimal(1e-9)
-        if abs(Decimal(self.angle(v))) < tolerance or abs(Decimal(self.angle(v))-Decimal(math.pi)) < tolerance:
+        if abs(Decimal(self.angle(v))) < tolerance:
+            return True
+        elif abs(Decimal(self.angle(v))-Decimal(math.pi)) < tolerance:
             return True
         else:
             return False

@@ -15,6 +15,9 @@ class Plane(object):
         if not normal_vector:
             all_zeros = ['0']*self.dimension
             normal_vector = Vector(all_zeros)
+        else:
+            nv = [Decimal(n) for n in normal_vector]
+            normal_vector = Vector(nv)
         self.normal_vector = normal_vector
 
         if not constant_term:
@@ -26,14 +29,15 @@ class Plane(object):
 
     def set_basepoint(self):
         try:
-            n = self.normal_vector
+            n = self.normal_vector.coordinates
             c = self.constant_term
-            basepoint_coords = ['0']*self.dimension
+            bc = ['0']*self.dimension
+            basepoint_coords = [Decimal(num) for num in bc]
 
             initial_index = Plane.first_nonzero_index(n)
             initial_coefficient = n[initial_index]
 
-            basepoint_coords[initial_index] = c/initial_coefficient
+            basepoint_coords[initial_index] = Decimal(c)/Decimal(initial_coefficient)
             self.basepoint = Vector(basepoint_coords)
 
         except Exception as e:
@@ -87,6 +91,24 @@ class Plane(object):
         output += ' = {}'.format(constant)
 
         return output
+
+    def is_parallel(self, other):
+        nv1 = self.normal_vector
+        print(nv1.coordinates)
+        nv2 = other.normal_vector
+        print(nv2.coordinates)
+
+        return nv1.is_parallel(nv2)
+
+    def is_equal(self, other):
+        if not self.is_parallel(other):
+            return False
+
+        x0 = self.basepoint
+        y0 = other.basepoint
+        basepoint_difference = x0 - y0
+
+        return basepoint_difference.is_orthogonal(self.normal_vector)
 
 
     @staticmethod
