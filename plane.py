@@ -18,7 +18,7 @@ class Plane(object):
         else:
             nv = [Decimal(n) for n in normal_vector]
             normal_vector = Vector(nv)
-        self.normal_vector = normal_vector
+        self.normal_vector = normal_vector     
 
         if not constant_term:
             constant_term = Decimal('0')
@@ -109,6 +109,44 @@ class Plane(object):
         basepoint_difference = x0 - y0
 
         return basepoint_difference.is_orthogonal(self.normal_vector)
+    
+    def intersect(self, plane2, plane3):
+        p1D = [Decimal(n) for n in self.normal_vector.coordinates]
+        k1D = Decimal(self.constant_term)
+        p2D = [Decimal(n) for n in plane2.normal_vector.coordinates]
+        k2D = plane2.constant_term
+        p3D = [Decimal(n) for n in plane3.normal_vector.coordinates]
+        k3D = plane3.constant_term
+        
+        factor12 = -p1D[0]/p2D[0]
+        mul_p2 = [factor12*n for n in p2D]
+        new_p2 = [sum(x) for x in zip(mul_p2, p1D)]
+        new_k2 = factor12*k2D + k1D
+        print "new_k2 = " + str(new_k2)
+        
+        factor13 = -p1D[0]/p3D[0]
+        print "factor13 = "  + str(factor13)
+        mul_p13 = [factor13*n for n in p3D]
+        print "mul_p13 = " + str(mul_p13)
+        new_p13 = [sum(x) for x in zip(mul_p13, p1D)]
+        print "new plane13 = " + str(new_p13)
+        new_k13 = (factor13*k3D) + k1D
+        print "new_k13 = " + str(new_k13)
+        
+        factor23 = -new_p2[1]/new_p13[1]
+        print "factor23 = "  + str(factor23)
+        mul_p3 = [factor23*n for n in new_p13]
+        print "mul_p3 = " + str(mul_p3)
+        new_p3 = [sum(x) for x in zip(mul_p3, new_p2)]
+        print "new plane3 = " + str(new_p3)
+        new_k3 = (factor23*new_k13) + new_k2
+        print "new_k3 = " + str(new_k3)
+        
+        z = new_k3/new_p3[2]
+        y = (new_k2-z*new_p2[2])/new_p2[1]
+        x = (k1D - y*p1D[1] - z*p1D[2])/p1D[0]
+        
+        return x,y,z
 
 
     @staticmethod
