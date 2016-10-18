@@ -1,7 +1,15 @@
 import math
 from decimal import Decimal
 
+class Book(object):
+      def __init__(self,title,author):
+          self.title = title
+          self.author = author
 
+      def __iter__(self):
+          for each in self.__dict__.keys():
+              yield self.__getattribute__(each)
+            
 class Vector(object):
     def __init__(self, coordinates):
         try:
@@ -16,6 +24,17 @@ class Vector(object):
         except TypeError:
             raise TypeError('The coordinates must be an iterable')
 
+    # http://stackoverflow.com/questions/5434400/python-is-it-possible-to-make-a-class-iterable-using-the-standard-syntax        
+    def __iter__(self):
+          for each in self.__dict__.keys():
+              yield self.__getattribute__(each)
+            
+    def __getitem__(self,index):
+        if index <5:
+            return self.coordinates[index]
+        else:
+            raise IndexError('this is high enough')
+                    
     def __add__(self, other):
         try:
             if not self.dimension == other.dimension:

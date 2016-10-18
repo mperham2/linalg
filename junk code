@@ -1,0 +1,3 @@
+        #else:
+         #   nv = [Decimal(n) for n in normal_vector]
+         #   normal_vector = Vector(nv)

@@ -11,13 +11,11 @@ class Plane(object):
 
     def __init__(self, normal_vector=None, constant_term=None):
         self.dimension = 3
-
+        print 1+1
         if not normal_vector:
             all_zeros = ['0']*self.dimension
             normal_vector = Vector(all_zeros)
-        else:
-            nv = [Decimal(n) for n in normal_vector]
-            normal_vector = Vector(nv)
+        
         self.normal_vector = normal_vector     
 
         if not constant_term:

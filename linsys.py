@@ -27,15 +27,24 @@ class LinearSystem(object):
 
 
     def swap_rows(self, row1, row2):
-        pass # add your code here
+        temp = self.planes[row1]
+        self.planes[row1] = self.planes[row2]
+        self.planes[row2] = temp
+        return self.planes
+        #pass # add your code here
 
 
     def multiply_coefficient_and_row(self, coefficient, row):
-        pass # add your code here
+        self.planes[row] = self.planes[row]*coefficient
+        return self.planes
+        #pass # add your code here
 
 
     def add_multiple_times_row_to_row(self, coefficient, row_to_add, row_to_be_added_to):
-        pass # add your code here
+        multiple_row =  self.planes[row_to_add]*coefficient
+        self.planes[row_to_be_added_to] = multiple_row + self.planes[row_to_be_added_to]
+        return self.planes
+        #pass # add your code here
 
 
     def indices_of_first_nonzero_terms_in_each_row(self):
